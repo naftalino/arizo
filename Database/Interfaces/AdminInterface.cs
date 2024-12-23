@@ -6,7 +6,7 @@ namespace bot.Database.Interfaces
     {
         void CreateAdmin(long userId);
         void DeleteAdmin(long userId);
-        void UpdateAdmin(long userId);
+        void UpdateAdmin(long UserId);
         Admins GetAdmin(long userId);
         List<Admins> GetAdmins();
     }

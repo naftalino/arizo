@@ -27,9 +27,9 @@ public class AdminRepository : IAdmin
         }
     }
 
-    public void UpdateAdmin(long userId)
+    public void UpdateAdmin(long UserId)
     {
-        var admin = _context.Admins.FirstOrDefault(a => a.Id == userId);
+        var admin = _context.Admins.FirstOrDefault(a => a.Id == UserId);
         if (admin != null)
         {
             _context.Admins.Update(admin);

@@ -1,7 +1,7 @@
-public class Cache
+namespace bot.Cache
 {
-    public Cache()
+    public class Cache
     {
-
+        
     }
 }

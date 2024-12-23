@@ -1,6 +1,6 @@
-public class Session
+namespace bot.Cache
 {
-    public Session()
+    public class Session
     {
 
     }
