@@ -1,4 +1,4 @@
-# Arizo
+# Arizo [Em andamento]
 
 ## Descrição
 - Arizo é um projeto solo desenvolvido em C# que tem como objetivo apenas treinar minhas habilidades com o ecossistema .NET e entre outras coisas. Deixo-o livre e open-source para qualquer comunidade não somente usufruir e aprender, mas também contribuir para que mais pessoas aprendam.
