@@ -16,7 +16,7 @@ class Program
 
         var app = builder.Build();
 
-        string botToken = "7898841697:AAE46Ijd-TIr_WyuzZgIFDsU_K4mxVIWkAA";
+        string botToken = Environment.GetEnvironmentVariable("BOT_TOKEN") ?? throw new InvalidOperationException("BOT_TOKEN environment variable is not set.");
         var botService = new BotService(botToken, app.Services);
         botService.Start();
         await Task.Delay(-1);
