@@ -1,6 +1,5 @@
 using bot.Database.Repositories;
 using Bot.Commands;
-using Microsoft.Extensions.DependencyInjection;
 using Telegram.Bot;
 using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
@@ -21,6 +20,7 @@ class BotService
         {
             new StartCommand(_services.GetRequiredService<UserRepository>()),
             new HelpCommand(),
+            new ProfileCommand(_services.GetRequiredService<UserRepository>()),
         };
     }
 
