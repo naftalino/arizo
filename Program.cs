@@ -1,11 +1,13 @@
 ﻿using bot.Database;
 using bot.Database.Repositories;
 using Microsoft.EntityFrameworkCore;
+using DotNetEnv;
 
 class Program
 {
     static async Task Main(string[] args)
     {
+        Env.Load();
         var builder = WebApplication.CreateBuilder(args);
 
         builder.Services.AddRazorPages();
