@@ -11,7 +11,7 @@ namespace bot.Database
         public DbSet<User> User { get; set; }
         public DbSet<Admins> Admins { get; set; }
         public DbSet<Card> Card { get; set; }
-        public DbSet<Collections> Collections { get; set; }
+        public DbSet<Collection> Collections { get; set; }
         public DbSet<Events> Events { get; set; }
         public DbSet<History> History { get; set; }
         public DbSet<Rank> Rank { get; set; }
@@ -28,7 +28,7 @@ namespace bot.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Collections>()
+            modelBuilder.Entity<Collection>()
             .HasKey(c => new { c.UserId, c.CardId }); // Definir as chaves compostas
 
             //base.OnModelCreating(modelBuilder);
@@ -39,9 +39,9 @@ namespace bot.Database
                 .OnDelete(DeleteBehavior.Cascade);
 
             // Configurar relacionamento com Card
-            modelBuilder.Entity<Collections>()
+            modelBuilder.Entity<Collection>()
                 .HasOne(c => c.Card) // Uma coleção referencia um único Card
-                .WithMany(card => card.Collections) // Um Card pode estar em várias coleções
+                .WithMany() // Card pode estar em muitas coleções
                 .HasForeignKey(c => c.CardId) // CardId como chave estrangeira
                 .OnDelete(DeleteBehavior.Restrict); // Evitar exclusão de Cards vinculados
         }

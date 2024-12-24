@@ -1,6 +1,6 @@
 namespace bot.Database.Models
 {
-    public class Collections
+    public class Collection
     {
         public required long UserId { get; set; }
         public required int CardId { get; set; }

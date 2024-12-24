@@ -14,6 +14,6 @@ namespace bot.Database.Models
         public int SerieId { get; set; }
         public required Serie Serie { get; set; }
         public List<Card> Cards { get; set; } = new();
-        public List<Collections> Collections { get; set; } = new();
+        public List<Collection> Collections { get; set; } = new();
     }
 }

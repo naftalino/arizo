@@ -16,32 +16,11 @@ namespace Bot.Commands
             _UserRepository = userRepository;
         }
 
-        public string ShowProfile(long userID)
-        {
-            var info = _UserRepository.Read(userID);
-            if (info != null)
-            {
-                var textProfile = @$"
-👤 <i><b>Seu lindo perfil:</b></i>
-
-🆔: <code>{info.Id}</code>
-💬: <code>{info.Bio}</code>
-🃏: <code>{info.CardQuantity}</code>
-🪙: <code>{info.Coins}</code>
-                ";
-                return textProfile;
-            }
-            else
-            {
-                return "Eu te conheço? Kkkkkkk";
-            }
-        }
-
         public async Task ExecuteAsync(ITelegramBotClient botClient, Message message, CancellationToken cancellationToken)
         {
-            var profile = ShowProfile(message.Chat.Id);
+            var profile = _UserRepository.Profile(message.Chat.Id);
             var inline = new InlineKeyboardMarkup()
-            .AddButton(InlineKeyboardButton.WithCopyText("Copiar perfil", profile));
+            .AddButton(InlineKeyboardButton.WithCallbackData("Configurar perfil", "configurar_meu_perfil"));
 
             await botClient.SendMessage(
             chatId: message.Chat.Id,
