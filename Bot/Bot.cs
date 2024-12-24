@@ -28,7 +28,7 @@ class BotService
     {
         var receiverOptions = new ReceiverOptions
         {
-            AllowedUpdates = new[] { UpdateType.Message, UpdateType.CallbackQuery}
+            AllowedUpdates = new[] { UpdateType.Message, UpdateType.CallbackQuery }
         };
 
         _bot.StartReceiving(
@@ -37,8 +37,6 @@ class BotService
             receiverOptions: receiverOptions,
             cancellationToken: default
         );
-        Console.ForegroundColor = ConsoleColor.Black;
-        Console.BackgroundColor = ConsoleColor.White;
         Console.WriteLine("Bot Inicializado.");
     }
 

@@ -2,10 +2,9 @@
 using bot.Database.Repositories;
 using Microsoft.EntityFrameworkCore;
 using DotNetEnv;
-
-class Program
+class _Program
 {
-    static async Task Main(string[] args)
+    static async Task App(string[] args)
     {
         Env.Load();
         var builder = WebApplication.CreateBuilder(args);

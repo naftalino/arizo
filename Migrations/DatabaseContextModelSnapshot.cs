@@ -83,12 +83,15 @@ namespace bot.Migrations
                     b.ToTable("Card");
                 });
 
-            modelBuilder.Entity("bot.Database.Models.Collections", b =>
+            modelBuilder.Entity("bot.Database.Models.Collection", b =>
                 {
                     b.Property<long>("UserId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("CardId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("CardId1")
                         .HasColumnType("INTEGER");
 
                     b.Property<bool>("IsFavorite")
@@ -103,6 +106,8 @@ namespace bot.Migrations
                     b.HasKey("UserId", "CardId");
 
                     b.HasIndex("CardId");
+
+                    b.HasIndex("CardId1");
 
                     b.ToTable("Collections");
                 });
@@ -339,13 +344,17 @@ namespace bot.Migrations
                     b.Navigation("Serie");
                 });
 
-            modelBuilder.Entity("bot.Database.Models.Collections", b =>
+            modelBuilder.Entity("bot.Database.Models.Collection", b =>
                 {
                     b.HasOne("bot.Database.Models.Card", "Card")
-                        .WithMany("Collections")
+                        .WithMany()
                         .HasForeignKey("CardId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("bot.Database.Models.Card", null)
+                        .WithMany("Collections")
+                        .HasForeignKey("CardId1");
 
                     b.HasOne("bot.Database.Models.User", "User")
                         .WithMany()

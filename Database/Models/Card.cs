@@ -11,8 +11,8 @@ namespace bot.Database.Models
         public int Price { get; set; } = new Random().Next(1, 100);
         public bool IsLimitedEdition { get; set; } = false;
         public int Popularity { get; set; } = 0;
-        public int SerieId { get; set; }
-        public required Serie Serie { get; set; }
+        public required int SerieId { get; set; }
+        public Serie Serie { get; set; }
         public List<Card> Cards { get; set; } = new();
         public List<Collection> Collections { get; set; } = new();
     }

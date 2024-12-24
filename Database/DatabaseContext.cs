@@ -31,19 +31,23 @@ namespace bot.Database
             modelBuilder.Entity<Collection>()
             .HasKey(c => new { c.UserId, c.CardId }); // Definir as chaves compostas
 
-            //base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Card>()
                 .HasOne(c => c.Serie)
-                .WithMany(c => c.Cards)
+                .WithMany(s => s.Cards)
                 .HasForeignKey(c => c.SerieId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // Configurar relacionamento com Card
+            modelBuilder.Entity<Serie>()
+                .HasMany(s => s.Cards)
+                .WithOne(c => c.Serie)
+                .HasForeignKey(c => c.SerieId)
+                .OnDelete(DeleteBehavior.Cascade);
+
             modelBuilder.Entity<Collection>()
-                .HasOne(c => c.Card) // Uma coleção referencia um único Card
-                .WithMany() // Card pode estar em muitas coleções
-                .HasForeignKey(c => c.CardId) // CardId como chave estrangeira
-                .OnDelete(DeleteBehavior.Restrict); // Evitar exclusão de Cards vinculados
+                .HasOne(c => c.Card)
+                .WithMany()
+                .HasForeignKey(c => c.CardId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

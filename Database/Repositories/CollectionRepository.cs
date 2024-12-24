@@ -14,7 +14,19 @@ namespace bot.Database.Repositories
 
         public bool InsertCardOnCollection(Collection collection)
         {
+            // Certifique-se de que o User e o Card existem
+            var userExists = _context.User.Any(u => u.Id == collection.UserId);
+            var cardExists = _context.Card.Any(c => c.Id == collection.CardId);
+
+            if (!userExists || !cardExists)
+            {
+                throw new InvalidOperationException("User or Card does not exist.");
+            }
+
+            // Adiciona a coleção e salva no banco
             _context.Collections.Add(collection);
+            _context.SaveChanges();
+
             return true;
         }
 

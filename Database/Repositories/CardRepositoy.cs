@@ -23,7 +23,7 @@ namespace bot.Database.Repositories
         public Card? DeleteCard(int CardId)
         {
             var card = _context.Find<Card>(CardId);
-            if(card == null)
+            if (card == null)
             {
                 return null;
             }
@@ -35,7 +35,7 @@ namespace bot.Database.Repositories
         public Card? UpdateCard(int CardId)
         {
             var card = _context.Find<Card>(CardId);
-            if(card == null)
+            if (card == null)
             {
                 return null;
             }
@@ -47,7 +47,7 @@ namespace bot.Database.Repositories
         public Card? GetCard(int CardId)
         {
             var card = _context.Find<Card>(CardId);
-            if(card == null)
+            if (card == null)
             {
                 return null;
             }
@@ -61,7 +61,12 @@ namespace bot.Database.Repositories
 
         public int HowManyUsersHaveCard(int CardId)
         {
-            return _context.Set<User>().Where(u => u.Id == CardId).Count();
+
+            return _context.Set<Collection>()
+            .Where(c => c.CardId == CardId)
+            .Select(c => c.UserId)
+            .Distinct()
+            .Count();
         }
-}
+    }
 }
