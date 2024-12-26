@@ -1,4 +1,6 @@
+using bot.Bot.Commands;
 using bot.Database.Repositories;
+using bot.Utils;
 using Bot.Commands;
 using Telegram.Bot;
 using Telegram.Bot.Polling;
@@ -21,6 +23,9 @@ class BotService
             new StartCommand(_services.GetRequiredService<UserRepository>()),
             new HelpCommand(),
             new ProfileCommand(_services.GetRequiredService<UserRepository>()),
+            new SpinCommand(
+                _services.GetRequiredService<UserRepository>()
+            ),
         };
     }
 
@@ -37,6 +42,7 @@ class BotService
             receiverOptions: receiverOptions,
             cancellationToken: default
         );
+
         Console.WriteLine("Bot Inicializado.");
     }
 

@@ -34,6 +34,7 @@ namespace bot.Database.Repositories
 
         public string Profile(long Id)
         {
+            var getCardsCount = new CollectionRepository(_context).HowManyCardsUserHas(Id);
             var info = Read(Id);
             if (info != null)
             {
@@ -42,7 +43,7 @@ namespace bot.Database.Repositories
 
 🆔 <b>ID</b>: <code>{info.Id}</code>
 💬 <b>Bio</b>: <code>{info.Bio}</code>
-🃏 <b>Cards Totais</b>: <code>{info.CardQuantity}</code>
+🃏 <b>Cards Totais</b>: <code>{getCardsCount}</code>
 🪙 <b>Coins</b>: <code>{info.Coins}</code>
 ✴️ <b>Points</b>: <code>{info.Points}</code>
 🎰 <b>Fichas</b>: <code>{info.Spins}</code>

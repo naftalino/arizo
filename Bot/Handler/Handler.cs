@@ -20,7 +20,7 @@ namespace Bot.Handler
 
             if (user == null)
             {
-                return true;
+                return false;
             }
 
             if (user.Banned)

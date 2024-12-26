@@ -6,7 +6,17 @@ namespace bot.Database
     public class DatabaseContext : DbContext
     {
 
-        public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { }
+        public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
+        {
+            try
+            {
+                this.Database.Migrate();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Erro ao migrar o db: " + e);
+            }
+        }
 
         public DbSet<User> User { get; set; }
         public DbSet<Admins> Admins { get; set; }
@@ -24,6 +34,7 @@ namespace bot.Database
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite("Data Source=database.db");
+
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

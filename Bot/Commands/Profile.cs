@@ -6,6 +6,8 @@ using Telegram.Bot.Types.ReplyMarkups;
 
 namespace Bot.Commands
 {
+    //        var gacha = new Gacha().Pull(1);
+
     public class ProfileCommand : IBotCommand
     {
         public string Command => "/profile";
@@ -19,6 +21,7 @@ namespace Bot.Commands
         public async Task ExecuteAsync(ITelegramBotClient botClient, Message message, CancellationToken cancellationToken)
         {
             var profile = _UserRepository.Profile(message.Chat.Id);
+
             var inline = new InlineKeyboardMarkup()
             .AddButton(InlineKeyboardButton.WithCallbackData("Configurar perfil", "configurar_meu_perfil"));
 
