@@ -111,8 +111,9 @@ namespace bot.Database.Repositories
             var collection = _context.Collections
                 .Where(c => c.UserId == userId && c.CardId == cardId)
                 .FirstOrDefault();
-
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
             collection.Tradeable = true;
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
             return true;
         }
 
@@ -122,7 +123,9 @@ namespace bot.Database.Repositories
                 .Where(c => c.UserId == userId && c.CardId == cardId)
                 .FirstOrDefault();
 
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
             collection.Tradeable = false;
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
             return true;
         }
 
