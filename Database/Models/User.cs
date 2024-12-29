@@ -9,6 +9,9 @@ namespace bot.Database.Models
         public int Spins { get; set; } = 10;
         public string Bio { get; set; } = "Olá! Eu estou usando o Arizo.";
         public bool Banned { get; set; } = false;
-        //public required Collections Collection { get; set; }
+
+        // Isso aqui é a propriedade que vai poder fazer navegar na coleção, relação um para muitos
+        // (um usuário pode ter várias cartas)
+        public ICollection<Collection> Collections { get; set; } = new List<Collection>();
     }
 }

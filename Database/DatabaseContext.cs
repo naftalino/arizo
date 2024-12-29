@@ -8,14 +8,14 @@ namespace bot.Database
 
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {
-            try
-            {
-                this.Database.Migrate();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Erro ao migrar o db: " + e);
-            }
+            // try
+            // {
+            //     this.Database.Migrate();
+            // }
+            // catch (Exception e)
+            // {
+            //     Console.WriteLine("Erro ao migrar o db: " + e);
+            // }
         }
 
         public DbSet<User> User { get; set; }
@@ -40,7 +40,7 @@ namespace bot.Database
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Collection>()
-            .HasKey(c => new { c.UserId, c.CardId }); // Definir as chaves compostas
+            .HasKey(c => new { c.UserId, c.CardId });
 
             modelBuilder.Entity<Card>()
                 .HasOne(c => c.Serie)
@@ -58,7 +58,8 @@ namespace bot.Database
                 .HasOne(c => c.Card)
                 .WithMany()
                 .HasForeignKey(c => c.CardId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
+
         }
     }
 }

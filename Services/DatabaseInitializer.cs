@@ -7,7 +7,7 @@ namespace bot.Services
     {
         public static void Initialize(DatabaseContext context)
         {
-            context.Database.Migrate();
+            // context.Database.Migrate();
         }
     }
 }
