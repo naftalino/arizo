@@ -42,6 +42,12 @@ namespace bot.Database
             modelBuilder.Entity<Collection>()
             .HasKey(c => new { c.UserId, c.CardId });
 
+            modelBuilder.Entity<Collection>()
+            .HasOne(c => c.Card)
+            .WithMany()
+            .HasForeignKey(c => c.CardId)
+            .OnDelete(DeleteBehavior.Cascade);
+
             modelBuilder.Entity<Card>()
                 .HasOne(c => c.Serie)
                 .WithMany(s => s.Cards)
@@ -52,12 +58,6 @@ namespace bot.Database
                 .HasMany(s => s.Cards)
                 .WithOne(c => c.Serie)
                 .HasForeignKey(c => c.SerieId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<Collection>()
-                .HasOne(c => c.Card)
-                .WithMany()
-                .HasForeignKey(c => c.CardId)
                 .OnDelete(DeleteBehavior.Cascade);
 
         }
