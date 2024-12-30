@@ -26,6 +26,12 @@ namespace bot.Bot.Commands
         protected abstract Task ExecuteCommandAsync(ITelegramBotClient botClient, Message message, CancellationToken cancellationToken);
         public async Task ExecuteAsync(ITelegramBotClient botClient, Message message, CancellationToken cancellationToken)
         {
+            if (message.From == null)
+            {
+                await botClient.SendMessage(message.Chat.Id, "<b>Ocorreu um erro inesperado. Contate: @adorabat.</b>", cancellationToken: cancellationToken, parseMode: ParseMode.Html);
+                return;
+            }
+
             switch (CanUserUseBot(message.From.Id))
             {
                 case 3:
@@ -35,7 +41,9 @@ namespace bot.Bot.Commands
                     await botClient.SendMessage(message.Chat.Id, "<b>Você foi banido e não pode usar meus serviços. Retrate-se => @adorabat.</b>", cancellationToken: cancellationToken, parseMode: ParseMode.Html);
                     break;
                 case 1:
-                    await botClient.SendMessage(message.Chat.Id, "<b>Você não está cadastrado. Cadastre-se com /start e comece a usufruir do bot :)</b>", cancellationToken: cancellationToken, parseMode: ParseMode.Html);
+                    // _UserRepository.Create(message.Chat.Id);
+
+                    await botClient.SendMessage(message.Chat.Id, "<b>Você não estava cadastrado. cadastrei você para poder usufruir do game :)</b>", cancellationToken: cancellationToken, parseMode: ParseMode.Html);
                     break;
                 default:
                     await botClient.SendMessage(message.Chat.Id, "<b>Ocorreu um erro inesperado. Contate: @adorabat.</b>", cancellationToken: cancellationToken, parseMode: ParseMode.Html);

@@ -33,21 +33,6 @@ namespace Bot.Commands
                 return;
             }
 
-            if (!can.CheckCanUse(message.Chat.Id))
-            {
-                var inline2 = new InlineKeyboardMarkup()
-                .AddButton(InlineKeyboardButton.WithUrl("Dev", "https://t.me/adorabat"));
-
-                await botClient.SendMessage(
-                    chatId: message.Chat.Id,
-                    text: "Você não pode usar o bot pois foi banido. Por favor, entre em contato com o desenvolvedor.",
-                    cancellationToken: cancellationToken,
-                    parseMode: ParseMode.Html,
-                    replyMarkup: inline2
-                );
-                return;
-            }
-
             var user = _userRepo.Read(message.Chat.Id);
             if (user == null)
             {
