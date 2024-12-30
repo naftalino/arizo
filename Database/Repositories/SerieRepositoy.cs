@@ -3,6 +3,13 @@ using bot.Database.Models;
 
 namespace bot.Database.Repositories
 {
+    public enum Genre
+    {
+        Filme = 1,
+        Serie = 2,
+        Animacao = 3
+    }
+
     public class SerieRepository : ISerieInterface
     {
         private readonly DatabaseContext _context;
