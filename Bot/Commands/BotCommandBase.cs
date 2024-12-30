@@ -3,6 +3,7 @@ using Bot.Commands;
 using Bot.Handler;
 using Telegram.Bot;
 using Telegram.Bot.Types;
+using Telegram.Bot.Types.Enums;
 
 namespace bot.Bot.Commands
 {
@@ -17,7 +18,7 @@ namespace bot.Bot.Commands
 
         public abstract string Command { get; }
 
-        protected bool CanUserUseBot(long userId)
+        protected int CanUserUseBot(long userId)
         {
             return new CanUseBot(_UserRepository).CheckCanUse(userId);
         }
@@ -25,20 +26,21 @@ namespace bot.Bot.Commands
         protected abstract Task ExecuteCommandAsync(ITelegramBotClient botClient, Message message, CancellationToken cancellationToken);
         public async Task ExecuteAsync(ITelegramBotClient botClient, Message message, CancellationToken cancellationToken)
         {
-#pragma warning disable CS8602 // Dereference of a possibly null reference.
-            if (CanUserUseBot(message.From.Id))
+            switch (CanUserUseBot(message.From.Id))
             {
-                await ExecuteCommandAsync(botClient, message, cancellationToken);
+                case 3:
+                    await ExecuteCommandAsync(botClient, message, cancellationToken);
+                    break;
+                case 2:
+                    await botClient.SendMessage(message.Chat.Id, "<b>Você foi banido e não pode usar meus serviços. Retrate-se => @adorabat.</b>", cancellationToken: cancellationToken, parseMode: ParseMode.Html);
+                    break;
+                case 1:
+                    await botClient.SendMessage(message.Chat.Id, "<b>Você não está cadastrado. Cadastre-se com /start e comece a usufruir do bot :)</b>", cancellationToken: cancellationToken, parseMode: ParseMode.Html);
+                    break;
+                default:
+                    await botClient.SendMessage(message.Chat.Id, "<b>Ocorreu um erro inesperado. Contate: @adorabat.</b>", cancellationToken: cancellationToken, parseMode: ParseMode.Html);
+                    break;
             }
-            else
-            {
-                await botClient.SendMessage(
-                    chatId: message.Chat.Id,
-                    text: "Você não tem permissão para usar este bot, pois está banido.",
-                    cancellationToken: cancellationToken
-                );
-            }
-#pragma warning restore CS8602 // Dereference of a possibly null reference.
         }
     }
 }

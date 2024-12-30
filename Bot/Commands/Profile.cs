@@ -10,7 +10,7 @@ namespace Bot.Commands
 
     public class ProfileCommand : IBotCommand
     {
-        public string Command => "/profile";
+        public string Command => "/prof";
         private readonly UserRepository _UserRepository;
 
         public ProfileCommand(UserRepository userRepository)

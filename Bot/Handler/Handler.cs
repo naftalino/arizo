@@ -14,20 +14,20 @@ namespace Bot.Handler
             _userRepo = userRepository;
         }
 
-        public bool CheckCanUse(long userId)
+        public int CheckCanUse(long userId)
         {
             var user = _userRepo.Read(userId);
 
             if (user == null)
             {
-                return true;
+                return 1;
             }
 
             if (user.Banned)
             {
-                return false;
+                return 2;
             }
-            return true;
+            return 3;
         }
     }
 }

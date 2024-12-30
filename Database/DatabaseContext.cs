@@ -59,7 +59,6 @@ namespace bot.Database
                 .WithOne(c => c.Serie)
                 .HasForeignKey(c => c.SerieId)
                 .OnDelete(DeleteBehavior.Cascade);
-
         }
     }
 }
