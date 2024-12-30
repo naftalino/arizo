@@ -11,7 +11,7 @@ namespace Bot.Commands
     {
         private readonly UserRepository _userRepo;
         public string Command => "/start";
-        private string IsNew = "<b>Olá! Meu nome é <i>Arizo, a lontra.</i> Prazer conhecer você!\nO que deseja fazer hoje?</b>";
+        private string IsNew = "<b>Olá! Meu nome é <i>Arizo</i>, Prazer conhecer você!\nO que deseja fazer hoje?</b>";
 
         public StartCommand(UserRepository userRepository)
         {

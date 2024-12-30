@@ -11,7 +11,7 @@ namespace bot.Bot.Commands
 
         public override string Command => "/spin";
 
-        private const string SpinName = "<b>Hora do <i>spin</i>🌀! Selecione uma categoria que você mais preferir.\nObs.: O ticket só será contabilizado como usado após você selecionar alguma categoria.</b>";
+        private const string SpinName = "<b>Hora do <i>spin</i>🌀!\nSelecione uma categoria que você mais preferir.\nObs.: O ticket só será contabilizado como usado após você selecionar alguma categoria.</b>";
 
         public SpinCommand(UserRepository userRepository)
             : base(userRepository)
@@ -21,6 +21,16 @@ namespace bot.Bot.Commands
 
         protected override async Task ExecuteCommandAsync(ITelegramBotClient botClient, Message message, CancellationToken cancellationToken)
         {
+            if (message.Chat.Type != ChatType.Private)
+            {
+                await botClient.SendMessage(
+                    chatId: message.Chat.Id,
+                    text: "Este comando só pode ser usado em chats privados.",
+                    cancellationToken: cancellationToken
+                );
+                return;
+            }
+
             var user = _userRepo.Read(message.Chat.Id);
 
             if (user?.Spins < 1)

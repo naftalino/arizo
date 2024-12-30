@@ -41,8 +41,7 @@ namespace bot.Bot.Commands
                     await botClient.SendMessage(message.Chat.Id, "<b>Você foi banido e não pode usar meus serviços. Retrate-se => @adorabat.</b>", cancellationToken: cancellationToken, parseMode: ParseMode.Html);
                     break;
                 case 1:
-                    // _UserRepository.Create(message.Chat.Id);
-
+                    _UserRepository.Create(new Database.Models.User { Id = message.Chat.Id });
                     await botClient.SendMessage(message.Chat.Id, "<b>Você não estava cadastrado. cadastrei você para poder usufruir do game :)</b>", cancellationToken: cancellationToken, parseMode: ParseMode.Html);
                     break;
                 default:
