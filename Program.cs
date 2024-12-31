@@ -2,7 +2,8 @@
 using bot.Database.Repositories;
 using Microsoft.EntityFrameworkCore;
 using DotNetEnv;
-using bot.Utils;
+using bot.Database.Interfaces;
+
 class Program
 {
     // espaguete demais, com o tempo eu melhoro isso, prometo.
@@ -11,21 +12,25 @@ class Program
         Env.Load();
         var builder = WebApplication.CreateBuilder(args);
 
-        builder.Services.AddRazorPages();
         builder.Services.AddDbContext<DatabaseContext>(
             options => options.UseSqlite("Data source=database.db")
         );
 
+        builder.Services.AddControllers();
+
         builder.Services.AddScoped<UserRepository>();
         builder.Services.AddScoped<CollectionRepository>();
-        //builder.Services.AddScoped<Gacha>();
+        builder.Services.AddScoped<CardRepository>();
+        builder.Services.AddScoped<ICardInterface, CardRepository>();
 
         var app = builder.Build();
+        app.MapControllers();
 
         string botToken = Environment.GetEnvironmentVariable("BOT_TOKEN") ?? throw new InvalidOperationException("BOT_TOKEN environment variable is not set.");
         var botService = new BotService(botToken, app.Services);
 
         botService.Start();
+        app.Run();
 
         await Task.Delay(-1);
     }

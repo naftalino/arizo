@@ -6,9 +6,9 @@ namespace bot.Database.Repositories
 {
     public class CardRepository : ICardInterface
     {
-        private readonly DbContext _context;
+        private readonly DatabaseContext _context;
 
-        public CardRepository(DbContext context)
+        public CardRepository(DatabaseContext context)
         {
             _context = context;
         }

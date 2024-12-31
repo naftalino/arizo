@@ -1,4 +1,5 @@
 using bot.Database;
+using bot.Database.Models;
 using bot.Database.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,14 +14,10 @@ namespace bot.Operations
             .Options;
 
             using var context = new DatabaseContext(options);
-            var repo = new CollectionRepository(context);
-            var cartastem = new CardRepository(context);
-
-            var cardsteem = cartastem.HowManyUsersHaveCard(1);
-            Console.WriteLine(cardsteem);
-
-            var series = repo.HowManyCardsUserHas(1); // Assuming 1 is the card ID
-            Console.WriteLine(series);
+            var repo = new SerieRepository(context);
+            var serieCreated = repo.CreateSerie(new Serie { Genre = Genre.Serie, Name = "Breaking Bad" });
+            Console.WriteLine(serieCreated.Id);
+            repo.GetSerie(serieCreated.Id);
         }
     }
 }

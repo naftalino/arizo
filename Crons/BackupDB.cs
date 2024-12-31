@@ -1,11 +1,13 @@
+using bot.Database.Models;
+
 namespace bot.Crons
 {
-    
-public class BackupDB
-{
-    public static void Backup()
+
+    public class BackupDB
     {
-        // Backup the database
+        public static void Backup()
+        {
+            // Backup the database
+        }
     }
-}
 }
