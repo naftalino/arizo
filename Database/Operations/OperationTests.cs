@@ -14,10 +14,9 @@ namespace bot.Operations
             .Options;
 
             using var context = new DatabaseContext(options);
-            var repo = new SerieRepository(context);
-            var serieCreated = repo.CreateSerie(new Serie { Genre = Genre.Serie, Name = "Breaking Bad" });
-            Console.WriteLine(serieCreated.Id);
-            repo.GetSerie(serieCreated.Id);
+            var repo = new CollectionRepository(context);
+            repo.InsertCardOnCollection(new Collection { CardId = 1, UserId = 7754973240 });
+            System.Console.WriteLine("deu tudo certo");
         }
     }
 }

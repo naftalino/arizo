@@ -7,8 +7,7 @@ namespace bot.Database.Models
         public int Quantity { get; set; } = 1;
         public bool Tradeable { get; set; } = true;
         public bool IsFavorite { get; set; } = false;
-
-        public required User User { get; set; }
-        public required Card Card { get; set; }
+        public User User { get; set; }
+        public Card Card { get; set; }
     }
 }

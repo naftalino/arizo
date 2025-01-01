@@ -3,6 +3,7 @@ using bot.Database.Repositories;
 using Microsoft.EntityFrameworkCore;
 using DotNetEnv;
 using bot.Database.Interfaces;
+using bot.Operations;
 
 class Program
 {
@@ -30,6 +31,7 @@ class Program
         var botService = new BotService(botToken, app.Services);
 
         botService.Start();
+        //Operations.Run();
         app.Run();
 
         await Task.Delay(-1);
